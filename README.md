@@ -202,59 +202,59 @@ public static int solution(int[] A) {
 ## 14.1 Binary - MinMax Solution
 ```
 class Solution {
-public int solution(int K, int M, int[] A) {
-    // write your code in Java SE 8
-    int high = sum(A);
-    int low = max(A);
+   public int solution(int K, int M, int[] A) {
+       // write your code in Java SE 8
+       int high = sum(A);
+       int low = max(A);
 
-    int mid = 0;
+       int mid = 0;
 
-    int smallestSum = 0;
+       int smallestSum = 0;
 
-    while (high >= low) {
-        mid = (high + low) / 2;
-        int numberOfBlock = blockCount(mid, A);
+       while (high >= low) {
+           mid = (high + low) / 2;
+           int numberOfBlock = blockCount(mid, A);
 
-        if (numberOfBlock > K) {
-            low = mid + 1;
-        } else if (numberOfBlock <= K) {
-            smallestSum = mid;
-            high = mid - 1;
-        }
+           if (numberOfBlock > K) {
+               low = mid + 1;
+           } else if (numberOfBlock <= K) {
+               smallestSum = mid;
+               high = mid - 1;
+           }
 
-    }
-    return smallestSum;
-}
+       }
+       return smallestSum;
+   }
 
-public int sum(int[] A) {
-    int total = 0;
-    for (int i = 0; i < A.length; i++) {
-        total += A[i];
-    }
-    return total;
-}
+   public int sum(int[] A) {
+       int total = 0;
+       for (int i = 0; i < A.length; i++) {
+           total += A[i];
+       }
+       return total;
+   }
 
-public int max(int[] A) {
-    int max = 0;
-    for (int i = 0; i < A.length; i++) {
-        if (max < A[i]) max = A[i];
-    }
-    return max;
-}
+   public int max(int[] A) {
+       int max = 0;
+       for (int i = 0; i < A.length; i++) {
+           if (max < A[i]) max = A[i];
+       }
+       return max;
+   }
 
-public int blockCount(int max, int[] A) {
-    int current = 0;
-    int count = 1;
-    for (int i = 0; i< A.length; i++) {
-        if (current + A[i] > max) {
-            current = A[i];
-            count++;
-        } else {
-            current += A[i];
-        }
-    }
-    return count;
-}
+   public int blockCount(int max, int[] A) {
+       int current = 0;
+       int count = 1;
+       for (int i = 0; i< A.length; i++) {
+           if (current + A[i] > max) {
+               current = A[i];
+               count++;
+           } else {
+               current += A[i];
+           }
+       }
+       return count;
+   }
 }
 ```
 Explanation:
