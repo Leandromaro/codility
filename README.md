@@ -1,7 +1,8 @@
 # codility
 Codility Exercises
 
-// 1 - binaryGap
+## 1 - binaryGap
+```
 class Solution {
         LinkedList<Integer> l = new LinkedList<Integer>();
         for(int i : A) {
@@ -12,9 +13,10 @@ class Solution {
 
         System.out.println(A);
 }
+```
 
-//2.a - Ciclyc
-
+## 2.a - Ciclyc
+```
 class Solution {
         LinkedList<Integer> l = new LinkedList<Integer>();
         for(int i : A) {
@@ -25,7 +27,9 @@ class Solution {
 
         System.out.println(A);
 }
-//2.b OddNumber
+```
+## 2.b OddNumber
+```
 class Solution {
     public int solution(int[] A) {
         Map<Integer, Long> collect = Arrays.stream(A)
@@ -42,8 +46,9 @@ class Solution {
         return 0; 
     }
 }
-
-// 3.a Frog
+```
+## 3.a Frog
+```
 class Solution {
     public int solution(int X, int Y, int D) {
         double doubleX = X;
@@ -53,8 +58,10 @@ class Solution {
         return (int) Math.ceil(div);
     }
 }
+```
 
-// 3.b PermMissingElement
+## 3.b PermMissingElement
+```
  public static int solution(int[] A) {
         if(A.length == 0) return 1;
 
@@ -73,7 +80,9 @@ class Solution {
         if(sumArr == sumN)  return A.length;
         return  sumN - sumArr;
     }
-// 3.c TapeEquilibrium
+```
+## 3.c TapeEquilibrium
+```
 public int solution(int[] A) {
         long sumAllElements = 0;
         for(int i=0; i<A.length; i++) {
@@ -93,7 +102,9 @@ public int solution(int[] A) {
         }
         return minDifference;
     }
-// 4.1 FrogRiverSide
+```
+## 4.1 FrogRiverSide
+```
 class Solution {
     public int solution(int X, int[] A) {
         int steps = X;
@@ -109,3 +120,4 @@ class Solution {
         return -1;
     }
 }
+```
