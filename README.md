@@ -123,6 +123,8 @@ class Solution {
 ```
 ## 4.2 MaxCounter
 ```
+ // Result -> 77% 
+ // Complexity O(N2)
   public static int[] solution(int N, int[] A) {
         int[] counters = new int[N];
         int maxValue = 0;
@@ -139,3 +141,32 @@ class Solution {
         return counters;
     }
 ```
+```
+// Result -> 100%
+// Avoid consecutives for O(N2) using two separates for get linear complexity 
+int result[] = new int[N];
+        int lastUpdate = 0;
+        int length = A.length;
+        int maxValue = 0;
+        for (int i=0; i<length;i++){
+            int operation = A[i];
+            if(operation > N){
+                lastUpdate = maxValue;
+            }else{
+                int position = operation - 1;
+                if (result[position] < lastUpdate)
+                    result[position] = lastUpdate + 1;
+                else{
+                    result[position]++;
+                }
+                if (result[position] > maxValue) {
+                    maxValue = result[position];
+                }
+            }
+        }
+        for (int iii = 0; iii < N; iii++) {
+            if (result[iii] < lastUpdate)
+                result[iii] = lastUpdate;
+        }
+        return result;
+        ```
