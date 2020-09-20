@@ -172,3 +172,22 @@ class Solution {
         return result;
     }
 ```
+## 4.3 Missing Integer 
+```
+public static int solution(int[] A) {
+        int smallestMissingInteger = 1;
+        if (A.length == 0) {
+            return smallestMissingInteger;
+        }
+        Set<Integer> set = new HashSet<Integer>();
+        for (int value : A) {
+            if (value > 0) {
+                set.add(value);
+            }
+        }
+        while (set.contains(smallestMissingInteger)) {
+            smallestMissingInteger++;
+        }
+        return smallestMissingInteger;
+    }
+    ```
