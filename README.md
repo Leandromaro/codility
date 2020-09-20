@@ -190,4 +190,4 @@ public static int solution(int[] A) {
         }
         return smallestMissingInteger;
     }
-    ```
+```
