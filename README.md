@@ -199,3 +199,80 @@ public static int solution(int[] A) {
         return smallestMissingInteger;
     }
 ```
+## 14.1 Binary - MinMax Solution
+```
+class Solution {
+public int solution(int K, int M, int[] A) {
+    // write your code in Java SE 8
+    int high = sum(A);
+    int low = max(A);
+
+    int mid = 0;
+
+    int smallestSum = 0;
+
+    while (high >= low) {
+        mid = (high + low) / 2;
+        int numberOfBlock = blockCount(mid, A);
+
+        if (numberOfBlock > K) {
+            low = mid + 1;
+        } else if (numberOfBlock <= K) {
+            smallestSum = mid;
+            high = mid - 1;
+        }
+
+    }
+    return smallestSum;
+}
+
+public int sum(int[] A) {
+    int total = 0;
+    for (int i = 0; i < A.length; i++) {
+        total += A[i];
+    }
+    return total;
+}
+
+public int max(int[] A) {
+    int max = 0;
+    for (int i = 0; i < A.length; i++) {
+        if (max < A[i]) max = A[i];
+    }
+    return max;
+}
+
+public int blockCount(int max, int[] A) {
+    int current = 0;
+    int count = 1;
+    for (int i = 0; i< A.length; i++) {
+        if (current + A[i] > max) {
+            current = A[i];
+            count++;
+        } else {
+            current += A[i];
+        }
+    }
+    return count;
+}
+}
+```
+Explanation:
+So what the code does is using a form of binary search. It also uses an example quite similar to your problem.). Where you search for the minimum sum every block needs to contain. In the example case, you need the divide the array in 3 parts
+
+When doing a binary search you need to define 2 boundaries, where you are certain that your answer can be found in between. Here, the lower boundary is the maximum value in the array (lower). For the example, this is 5 (this is if you divide your array in 7 blocks). The upper boundary (upper) is 15, which is the sum of all the elements in the array (this is if you divide the array in 1 block.)
+
+Now comes the search part: In solution() you start with your bounds and mid point (10 for the example). In calculateBlockCount you count (count ++ does that) how many blocks you can make if your sum is a maximum of 10 (your middle point/ or maxSum in calculateBlockCount).
+For the example 10 (in the while loop) this is 2 blocks, now the code returns this (blocks) to solution. Then it checks whether is less or more than K, which is the number of blocks you want. If its less than K your mid point is high because you're putting to many array elements in your blocks. If it's more than K, than your mid point is too high and you're putting too little array elements in your array. Now after the checking this, it halves the solution space (upper = mid-1). This happens every loop, it halves the solution space which makes it converge quite quickly.
+
+Now you keep going through your while adjusting the mid, till this gives the amount blocks which was in your input K.
+```
+Mid =10 , calculateBlockCount returns 2 blocks
+solution. 2 blocks < K so upper -> mid-1 =9, mid -> 7  (lower is 5)
+Mid =7 , calculateBlockCount returns 2 blocks  
+solution() 2 blocks < K so upper -> mid-1 =6, mid -> 5 (lower is 5, cast to int makes it 5)
+Mid =5 , calculateBlockCount returns 4 blocks
+solution() 4 blocks < K so lower -> mid+1 =6, mid -> 6  (lower is 6, upper is 6
+Mid =6 , calculateBlockCount returns 3 blocks
+So the function returns mid =6....
+```
