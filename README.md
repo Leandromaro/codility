@@ -4,14 +4,22 @@ Codility Exercises
 ## 1 - binaryGap
 ```
 class Solution {
-        LinkedList<Integer> l = new LinkedList<Integer>();
-        for(int i : A) {
-            l.add(i);
+   public int solution(int N) {
+        String binaryString = Integer.toBinaryString(N);
+        String[] binaryArray = binaryString.split("");
+        int max = 0;
+        int count = 0;
+        for (String i : binaryArray){
+            if(i.equals("1")){
+                if(count>max){
+                    max = count;
+                }
+                count = 0;
+            }else {
+                count++;
+            }
         }
-        Integer last = l.getLast();
-        l.remove(l.size()-1);
-
-        System.out.println(A);
+  }
 }
 ```
 
