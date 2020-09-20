@@ -144,7 +144,8 @@ class Solution {
 ```
 // Result -> 100%
 // Avoid consecutives for O(N2) using two separates for statements we get linear complexity 
-int result[] = new int[N];
+ public static int[] solution(int N, int[] A) {
+        int result[] = new int[N];
         int lastUpdate = 0;
         int length = A.length;
         int maxValue = 0;
@@ -169,5 +170,5 @@ int result[] = new int[N];
                 result[iii] = lastUpdate;
         }
         return result;
-        
+    }
 ```
