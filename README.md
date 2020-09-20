@@ -121,3 +121,21 @@ class Solution {
     }
 }
 ```
+## 4.2 MaxCounter
+```
+  public static int[] solution(int N, int[] A) {
+        int[] counters = new int[N];
+        int maxValue = 0;
+        for (int operation : A) {
+            if (operation > N) {
+                Arrays.fill(counters, maxValue);
+            } else {
+                counters[operation - 1]++;
+                if (counters[operation - 1] > maxValue) {
+                    maxValue = counters[operation - 1];
+                }
+            }
+        }
+        return counters;
+    }
+```
