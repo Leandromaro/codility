@@ -143,7 +143,7 @@ class Solution {
 ```
 ```
 // Result -> 100%
-// Avoid consecutives for O(N2) using two separates for get linear complexity 
+// Avoid consecutives for O(N2) using two separates for statements we get linear complexity 
 int result[] = new int[N];
         int lastUpdate = 0;
         int length = A.length;
