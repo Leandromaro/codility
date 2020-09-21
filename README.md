@@ -202,13 +202,19 @@ public static int solution(int[] A) {
 ## 4.4 PermCheck
 ```
 public static int solution(int[] A) {
-Set<Integer> value = Arrays.stream(A).boxed().collect(Collectors.toCollection(HashSet::new));
+        Set<Integer> value = Arrays
+        .stream(A)
+        .boxed()
+        .collect(Collectors.toCollection(HashSet::new));
+        
         Integer count = 1;
 
         while (value.contains(count)){
             count++;
         }
+        
         Integer flag = count - 1;
+        
         if(flag.equals(A.length)){
            return 1;
         }
