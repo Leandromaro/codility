@@ -219,8 +219,14 @@ public static int solution(int[] A) {
            return 1;
         }
         return 0;
+}
 ```
-
+## 5.1 CountDiv
+```
+   public int solution(int A, int B, int K) {
+        return B / K - A / K + (A % K == 0 ? 1 : 0);
+    }
+```
 ## 14.1 Binary - MinMax Solution
 ```
 class Solution {
