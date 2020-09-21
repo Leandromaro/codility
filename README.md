@@ -199,7 +199,7 @@ public static int solution(int[] A) {
         return smallestMissingInteger;
     }
 ```
-## 4.4 
+## 4.4 PermCheck
 ```
 public static int solution(int[] A) {
 Set<Integer> value = Arrays.stream(A).boxed().collect(Collectors.toCollection(HashSet::new));
