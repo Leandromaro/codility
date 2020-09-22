@@ -227,6 +227,41 @@ public static int solution(int[] A) {
         return B / K - A / K + (A % K == 0 ? 1 : 0);
     }
 ```
+## 5.2 GenomicRangeQuery
+```
+   public static int[] solution(String S, int[] P, int[] Q){
+        CharSequence charSequence;
+        int length = P.length;
+        int[] result = new int[length];
+        for (int i=0; i<length; i++){
+            int left = P[i];
+            int right = Q[i]+1;
+            charSequence = S.subSequence(left, right);
+            String[] segment = charSequence.toString().split("");
+
+            int countA, countC, countG, countT = 0;
+            countA = (int) Arrays.stream(segment).filter(s -> s.equals("A")).count();
+            countC = (int) Arrays.stream(segment).filter(s -> s.equals("C")).count();
+            countG = (int) Arrays.stream(segment).filter(s -> s.equals("G")).count();
+            countT = (int) Arrays.stream(segment).filter(s -> s.equals("T")).count();
+
+            int min = 0;
+            if(countA>0){
+                min = 1;
+            }else if(countC>0){
+                min = 2;
+            }else if(countG>0){
+                min = 3;
+            }else if(countT>0){
+                min = 4;
+            }
+            result[i] = min;
+
+        }
+        return result;
+    }
+```
+
 ## 14.1 Binary - MinMax Solution
 ```
 class Solution {
