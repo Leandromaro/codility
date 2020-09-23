@@ -262,6 +262,16 @@ public static int solution(int[] A) {
     }
 ```
 
+## 6.1 Distinct
+```
+   public static int solution(int[] A) {
+       return Arrays
+                .stream(A)
+                .boxed()
+                .collect(Collectors.toSet())
+                .size();
+    }
+```
 ## 14.1 Binary - MinMax Solution
 ```
 class Solution {
