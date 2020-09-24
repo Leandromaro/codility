@@ -345,43 +345,63 @@ public int solution(int[] A) {
 
 ### Maximum subarray problem
 
-In computer science, the maximum sum subarray problem is the task of finding a contiguous subarray with the largest sum, within a given one-dimensional array A[1...n] of numbers. Formally, the task is to find indices {\displaystyle i}i and {\displaystyle j}j with {\displaystyle 1\leq i\leq j\leq n}{\displaystyle 1\leq i\leq j\leq n}, such that the sum
+Let’s look at the picture below and make some key observations.
 
-{\displaystyle \sum _{x=i}^{j}A[x]}{\displaystyle \sum _{x=i}^{j}A[x]}
-is as large as possible. (Some formulations of the problem also allow the empty subarray to be considered; by convention, the sum of all values of the empty subarray is zero.) Each number in the input array A could be positive, negative, or zero.[1]
+![alt text](https://bogdankotzev.com/wp-content/uploads/2018/07/MaxDoubleSliceSum1.png)
 
-For example, for the array of values [−2, 1, −3, 4, −1, 2, 1, −5, 4], the contiguous subarray with the largest sum is [4, −1, 2, 1], with sum 6.
 
-Some properties of this problem are:
+After digesting the equation for the problem, The sum of double slice (X, Y, Z) is the total of A[X + 1] + A[X + 2] + … + A[Y − 1] + A[Y + 1] + A[Y + 2] + … + A[Z − 1], we can simply see that the problem can be separated into two subarrays. The minimum value for our slice is always 0, because consecutive numbers such as (2,3,4) will yield 0 + 0 = 0.
 
-If the array contains all non-negative numbers, then the problem is trivial; a maximum subarray is the entire array.
-If the array contains all non-positive numbers, then a solution is any subarray of size 1 containing the maximal value of the array (or the empty subarray, if it is permitted).
-Several different sub-arrays may have the same maximum sum.
-This problem can be solved using several different algorithmic techniques, including brute force,[2] divide and conquer,[3] dynamic programming,[4] and reduction to shortest paths
+The first subarray called leftHalf is from [1, Y).
 
+The second subarray called rightHalf is from (Y, N – 1].
+
+To solve the problem, we maximize the left slice, then we maximize the right slice and combine them. In the example above the maximized left slice is 2 + 6 = 8, and the maximized right slice is 4 + 5 = 9. This gives us 8 + 9 = 17.
+
+Now of course, we know this is the correct answer by the problem description, but in reality we are checking the max double slice for Y between [1,N-1].
+
+The code below works like this:
+
+Go through array A and store the maximized leftHalf into an array for later use.
+Go through array A and calculate the maximized rightHalf
+As soon as rightHalf is calculated we can use it in combination with the previously stored leftHalf result to calculate our maxSlice
+NOTE: The tricky part is figuring out which value in our array goes with our current rightHalf.
 ```
-public static int solution(int[] A) {
-        int[] maxStartingHere = new int[A.length];
-        int[] maxEndingHere = new int[A.length];
-        int maxSum = 0, len = A.length;
+// number of elements in A
+        int N = A.length;
+        // variable representing the maximum slice
+        int maxSlice = 0;
+        // holds the results for the left half calculations
+        int [] leftHalfResults = new int [N];
+        // used for calculation of the right half
+        int rightHalf = 0;
 
-        for(int i = len - 2; i > 0; --i ) {
-            maxSum = Math.max(0, A[i] + maxSum);
-            maxStartingHere[i] = maxSum;
-        }
-        maxSum = 0;
-        for(int i = 1; i < len - 1; ++i ) {
-            maxSum = Math.max(0, A[i] + maxSum);
-            maxEndingHere[i] = maxSum;
-        }
-        int maxDoubleSlice = 0;
-
-        for(int i = 0; i < len - 2; ++i) {
-            maxDoubleSlice = Math.max(maxDoubleSlice, maxEndingHere[i] + maxStartingHere[i+2]);
+        // maximum slice of the first half
+        // starts at 1, because our value at index 0 is always going to be 0
+        // ends at N-2, because that is the maximum size for our left half
+        // leftHalfResults[0] = 0;
+        for (int k = 1; k < N-2; k++) {
+            leftHalfResults[k] = Math.max(0, leftHalfResults[k-1] + A[k]);
         }
 
-        return maxDoubleSlice;
-    }
+
+        // calculate the maximum right half
+        // At the same time calculate the maximum slice for the current leftHalf and rightHalf combination
+        for (int i = N-1; i > 1 ; i--) {
+            // the tricky part was to figure out what k should be to make sure the two halves correspond to the same midpoint
+            // this took some time to do using System.out.println()
+            int k = i-2;
+            // when the right half is 0
+            if (i == N-1) {
+                rightHalf = 0;
+            }
+            else {
+                rightHalf = Math.max(0, rightHalf + A[i]);
+            }
+            maxSlice = Math.max(maxSlice, leftHalfResults[k] + rightHalf);
+        }
+
+        return maxSlice;
 ```
 
 ## 14.1 Binary - MinMax Solution
