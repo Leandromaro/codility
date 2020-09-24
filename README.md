@@ -343,6 +343,22 @@ public int solution(int[] A) {
 ```
 ## 9.1 Max Two Slides
 
+### Maximum subarray problem
+
+In computer science, the maximum sum subarray problem is the task of finding a contiguous subarray with the largest sum, within a given one-dimensional array A[1...n] of numbers. Formally, the task is to find indices {\displaystyle i}i and {\displaystyle j}j with {\displaystyle 1\leq i\leq j\leq n}{\displaystyle 1\leq i\leq j\leq n}, such that the sum
+
+{\displaystyle \sum _{x=i}^{j}A[x]}{\displaystyle \sum _{x=i}^{j}A[x]}
+is as large as possible. (Some formulations of the problem also allow the empty subarray to be considered; by convention, the sum of all values of the empty subarray is zero.) Each number in the input array A could be positive, negative, or zero.[1]
+
+For example, for the array of values [−2, 1, −3, 4, −1, 2, 1, −5, 4], the contiguous subarray with the largest sum is [4, −1, 2, 1], with sum 6.
+
+Some properties of this problem are:
+
+If the array contains all non-negative numbers, then the problem is trivial; a maximum subarray is the entire array.
+If the array contains all non-positive numbers, then a solution is any subarray of size 1 containing the maximal value of the array (or the empty subarray, if it is permitted).
+Several different sub-arrays may have the same maximum sum.
+This problem can be solved using several different algorithmic techniques, including brute force,[2] divide and conquer,[3] dynamic programming,[4] and reduction to shortest paths
+
 ```
 public static int solution(int[] A) {
         int[] maxStartingHere = new int[A.length];
