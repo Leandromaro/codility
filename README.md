@@ -307,9 +307,6 @@ class Solution {
 ```
 
 ## 8.1 
-```
-
-/*
 Difference between HashMap, LinkedHashMap and TreeMap
 
 All three classes implement the Map interface and offer mostly the same functionality. The most important difference is the order in which iteration through the entries will happen:
@@ -318,7 +315,30 @@ HashMap makes absolutely no guarantees about the iteration order. It can (and wi
 TreeMap will iterate according to the "natural ordering" of the keys according to their compareTo() method (or an externally supplied Comparator). Additionally, it implements the SortedMap interface, which contains methods that depend on this sort order.
 LinkedHashMap will iterate in the order in which the entries were put into the map
 "Hashtable" is the generic name for hash-based maps. In the context of the Java API, Hashtable is an obsolete class from the days of Java 1.1 before the collections framework existed. It should not be used anymore, because its API is cluttered with obsolete methods that duplicate functionality, and its methods are synchronized (which can decrease performance and is generally useless). Use ConcurrentHashMap instead of Hashtable.
-*/
+
+```
+public int solution(int[] A) {
+        int average = A.length / 2;
+        int moreThanAverage = average + 1;
+        Map<Integer, Long> collect = Arrays
+                .stream(A)
+                .boxed()
+                .collect(Collectors.groupingBy(e -> e.hashCode(), TreeMap::new, Collectors.counting()));
+        Optional<Integer> dominator = collect.keySet()
+                .stream()
+                .filter(k -> collect.get(k).intValue() >= moreThanAverage)
+                .findAny();
+        if (dominator.isPresent()) {
+            int count = 0;
+            while (count < A.length) {
+                if (A[count] == dominator.get()) {
+                    return count;
+                }
+                count++;
+            }
+        }
+        return -1;
+    }
 
 ```
 
