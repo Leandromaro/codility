@@ -364,10 +364,12 @@ The code below works like this:
 
 Go through array A and store the maximized leftHalf into an array for later use.
 Go through array A and calculate the maximized rightHalf
-As soon as rightHalf is calculated we can use it in combination with the previously stored leftHalf result to calculate our maxSlice
+As soon as rightHalf is calculated we can use it in combination with the previously stored leftHalf result to calculate our maxSlice.
+
 NOTE: The tricky part is figuring out which value in our array goes with our current rightHalf.
 ```
-// number of elements in A
+ public static int solution(int[] A) {
+        // number of elements in A
         int N = A.length;
         // variable representing the maximum slice
         int maxSlice = 0;
@@ -402,6 +404,7 @@ NOTE: The tricky part is figuring out which value in our array goes with our cur
         }
 
         return maxSlice;
+    }
 ```
 
 ## 14.1 Binary - MinMax Solution
