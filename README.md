@@ -407,6 +407,27 @@ NOTE: The tricky part is figuring out which value in our array goes with our cur
     }
 ```
 
+## 10.1 Count Factors
+```
+ public static int solution(int N) {
+        int factors = 0;
+        int squareRootN = (int) Math.sqrt(N);
+        if(Math.pow(squareRootN, 2) != N) {
+            squareRootN++; //round up for any non-perfect squares
+        }
+        else { //perfect squares have an additional factor
+            factors++;
+        }
+
+        for(int i=1; i<squareRootN; i++) {
+            if(N % i == 0) {
+                factors += 2;
+            }
+        }
+
+        return factors;
+    }
+```
 ## 14.1 Binary - MinMax Solution
 ```
 class Solution {
