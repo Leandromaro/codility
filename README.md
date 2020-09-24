@@ -428,6 +428,53 @@ NOTE: The tricky part is figuring out which value in our array goes with our cur
         return factors;
     }
 ```
+
+## 11.1 CountNonDivisible
+```
+   public static int[] solution(int[] A) {
+        // main idea:
+        // using "HashMap" to count
+
+        Map<Integer, Long> map1 = Arrays
+                .stream(A)
+                .boxed()
+                .collect(Collectors.groupingBy(v -> v, Collectors.counting()));
+
+        // map2(key, value)
+        HashMap<Integer, Integer> map2 = new HashMap<>();
+        // key: the elements, value, count of "number of non-divisors" of elements
+        for( int n : map1.keySet() ){
+            int numDivisors =0;
+            // find divisors from 1 to sqrt(n)
+            int sqrtN = (int)Math.sqrt(n);
+            for(int i=1; i<=sqrtN; i++ ){
+                if( n % i == 0){ // means: i could be a divisor
+                    int anotherDivisor = n/i;
+
+                    if(map1.containsKey(i)){
+                        numDivisors = (int) (numDivisors + map1.get(i));
+                    }
+                    if(anotherDivisor != i){ // avoid double count (be careful)
+                        if(map1.containsKey(anotherDivisor)){
+                            numDivisors = (int) (numDivisors + map1.get(anotherDivisor));
+                        }
+                    }
+                }
+            }
+
+            int numNonDivisors = A.length - numDivisors;
+            map2.put(n, numNonDivisors);
+        }
+
+        // results: number of non-divisors
+        int[] results = new int[A.length];
+        for (int i = 0; i < A.length; i++) {
+            results[i] = map2.get(A[i]);
+        }
+
+        return results;
+    }
+```
 ## 14.1 Binary - MinMax Solution
 ```
 class Solution {
